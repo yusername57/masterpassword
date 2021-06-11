@@ -1,0 +1,35 @@
+
+
+import pyAesCrypt
+# custom encryption/decryption buffer size (default is 64KB)
+bufferSize = 128 * 1024
+
+password=input("Dein passwort")
+
+# encrypt
+pyAesCrypt.encryptFile("data.txt", "data.txt.aes", password, bufferSize)
+# decrypt
+pyAesCrypt.decryptFile("data.txt.aes", "dataout.txt", password, bufferSize)
+
+
+
+
+EorD = str(input("E für encrypt oder D to decrypt :")).upper()
+
+
+if(EorD == "E"):
+    try:
+     pyAesCrypt.encryptFile("data.txt","data.txt.aes", password,bufferSize)
+     print("Datei ist jetzt encyrpted ")
+    except EOFError as err:
+      print(err)
+elif (EorD == "D"):
+    try:
+      pyAesCrypt.decryptFile("data.txt.aes","dataout.txt",password,bufferSize)
+      print("Datei ist decrypted")
+    except EOFError as err:
+        print(err)
+
+    else:
+        print("Falsche eingabe bitte versuchen sie es nochmal")
+        
